@@ -55,5 +55,23 @@ ext.versioning = [
             module_version.minor,
             module_version.patch
         )
+    },
+
+    // Returns the git hash of the last commit.
+    commit_hash: {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-parse', '--short', 'HEAD'
+            standardOutput = stdout
+        }
+        return stdout.toString().trim()
+    },
+
+    // Returns the current date and time, optionally using the specified format.
+    current_date: { String format ->
+        if (null == format) {
+            format = 'yyyy.MM.dd-HH:mmz'
+        }
+        return (new Date()).format(format)
     }
 ]
