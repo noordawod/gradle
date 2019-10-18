@@ -1,0 +1,25 @@
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+
+        // Enforce using the same version for Kotlin dependencies.
+        if ('org.jetbrains.kotlin' == requested.group) {
+            if (
+                'kotlin-stdlib-jdk7' == requested.name ||
+                'kotlin-stdlib-jdk8' == requested.name ||
+                'kotlin-stdlib' == requested.name ||
+                'kotlin-stdlib-common' == requested.name ||
+                'kotlin-compiler-embeddable' == requested.name ||
+                'kotlin-script-runtime' == requested.name ||
+                'kotlin-reflect' == requested.name
+            ) {
+                details.useVersion versioning.lib_kotlin
+            }
+        }
+
+        // Enforce using the same version for lifecycle libraries.
+        if ('androidx.lifecycle' == requested.group) {
+            details.useVersion versioning.lib_lifecycle
+        }
+    }
+}
