@@ -1,0 +1,59 @@
+// Fallback versioning info. DO NOT UPDATE THESE!
+// Override the version of your module/project in its build.gradle file.
+ext.module_version = [
+    major: 1,
+    minor: 0,
+    patch: 0
+]
+
+// Standard values and functions used across all modules/apps.
+ext.versioning = [
+    // Android SDK.
+    sdk_minimum: 21,
+    sdk_target: 29,
+
+    // Libraries.
+    lib_gradle_build: '3.5.1',
+    lib_kotlin: '1.3.50',
+    lib_androidx: '1.1.0',
+    lib_lifecycle: '2.1.0',
+
+    // Generate versionName value.
+    version_name: { Integer major, Integer minor, Integer patch ->
+        return "$major.$minor.$patch"
+    },
+
+    // Generate versionName value from the values in ext.module_version.
+    module_version_name: {
+        return versioning.version_name(
+            module_version.major,
+            module_version.minor,
+            module_version.patch
+        )
+    },
+
+    // Generate versionCode value.
+    version_code: { Integer major, Integer minor, Integer patch ->
+        def version_code = 0
+
+        // Add major.
+        version_code += (9 < major ? major : 10 * major) * 10000
+
+        // Add minor.
+        version_code += (9 < minor ? minor : 10 * minor) * 100
+
+        // Add patch.
+        version_code += 9 < patch ? patch : 10 * patch
+
+        return version_code
+    },
+
+    // Generate versionCode value from the values in ext.module_version.
+    module_version_code: {
+        return versioning.version_code(
+                module_version.major,
+                module_version.minor,
+                module_version.patch
+        )
+    }
+]
