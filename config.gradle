@@ -1,0 +1,19 @@
+android {
+    compileSdkVersion versioning.sdk_target
+
+    defaultConfig {
+        targetSdkVersion versioning.sdk_target
+        minSdkVersion versioning.sdk_minimum
+
+        versionName versioning.module_version_name()
+        versionCode versioning.module_version_code()
+
+        buildConfigField('String', 'COMMIT_HASH', '"' + versioning.commit_hash() + '"')
+        buildConfigField('String', 'BUILD_DATE', '"' + versioning.current_date() + '"')
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
