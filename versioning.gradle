@@ -71,7 +71,7 @@ ext.versioning = [
     // Returns the current date and time, optionally using the specified format.
     current_date: { String format ->
         if (null == format) {
-            format = 'yyyy.MM.dd-HH:mmz'
+            format = 'yyyy.MM.dd HH:mm z'
         }
         return (new Date()).format(format)
     }
