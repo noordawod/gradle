@@ -60,16 +60,15 @@ ext.versioning = [
 
     // Returns the git hash of the last commit.
     commit_hash: {
-        def stdout = new ByteArrayOutputStream()
-        ignoreExitValue true
-        exec {
-            commandLine 'git', 'rev-parse', '--short', 'HEAD'
-            standardOutput = stdout
-        }
-        if (0 == execResult.getExitValue()) {
+        try {
+            def stdout = new ByteArrayOutputStream()
+            exec {
+                commandLine 'git', 'rev-parse', '--short', 'HEAD'
+                standardOutput = stdout
+            }
             return stdout.toString().trim()
-        } else {
-           return 'empty-git-head'
+        } catch (Exception ignored) {
+            return 'empty-git-head'
         }
     },
 
