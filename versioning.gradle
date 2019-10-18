@@ -51,9 +51,9 @@ ext.versioning = [
     // Generate versionCode value from the values in ext.module_version.
     module_version_code: {
         return versioning.version_code(
-                module_version.major,
-                module_version.minor,
-                module_version.patch
+            module_version.major,
+            module_version.minor,
+            module_version.patch
         )
     }
 ]
