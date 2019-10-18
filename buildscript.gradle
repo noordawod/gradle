@@ -1,0 +1,13 @@
+buildscript {
+    apply from: 'https://raw.githubusercontent.com/noordawod/gradle/master/versioning.gradle'
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:${versioning.lib_gradle_build}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versioning.lib_kotlin}"
+    }
+}
